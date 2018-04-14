@@ -11,16 +11,16 @@
 [v _eecpymem eecpymem `(v  1 e 1 0 ]
 "39
 [v _memcpyee memcpyee `(v  1 e 1 0 ]
-"15 /home/evaota/MPLABXProjects/PowerCTRL_MutingRelayUnit.X/main.c
+"11 /home/evaota/MPLABXProjects/PowerCTRL_MutingRelayUnit.X/DetectSwitch.c
+[v _Switch_CountHIGH Switch_CountHIGH `(v  1 e 1 0 ]
+"26
+[v _Switch_GetTime Switch_GetTime `(ui  1 e 2 0 ]
+"12 /home/evaota/MPLABXProjects/PowerCTRL_MutingRelayUnit.X/main.c
 [v _main main `(v  1 e 1 0 ]
-"40
+"56
 [v _Basic_Init Basic_Init `(v  1 e 1 0 ]
-"51
+"67
 [v _Handler Handler `II(v  1 e 1 0 ]
-"63
-[v _Swich_CountHIGH Swich_CountHIGH `(v  1 e 1 0 ]
-"78
-[v _Switch_ReadTime Switch_ReadTime `(ui  1 e 2 0 ]
 "216 /opt/microchip/xc8/v1.43/include/pic12f675.h
 [v _GPIO GPIO `VEuc  1 e 1 @5 ]
 "450
@@ -41,6 +41,10 @@
 [v _GIE GIE `VEb  1 e 0 @95 ]
 "1547
 [v _GP0 GP0 `VEb  1 e 0 @40 ]
+"1549
+[v _GP1 GP1 `VEb  1 e 0 @41 ]
+"1551
+[v _GP2 GP2 `VEb  1 e 0 @42 ]
 "1555
 [v _GP4 GP4 `VEb  1 e 0 @44 ]
 "1557
@@ -53,34 +57,36 @@
 [v _TMR1IF TMR1IF `VEb  1 e 0 @96 ]
 "1653
 [v _TMR1ON TMR1ON `VEb  1 e 0 @128 ]
-"10 /home/evaota/MPLABXProjects/PowerCTRL_MutingRelayUnit.X/main.c
-[v _sw_time sw_time `ui  1 e 2 0 ]
-"15
+"9 /home/evaota/MPLABXProjects/PowerCTRL_MutingRelayUnit.X/DetectSwitch.c
+[v _time_save time_save `ui  1 s 2 time_save ]
+"12 /home/evaota/MPLABXProjects/PowerCTRL_MutingRelayUnit.X/main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"38
+"14
+[v main@stat stat `uc  1 a 1 11 ]
+"54
 } 0
-"78
-[v _Switch_ReadTime Switch_ReadTime `(ui  1 e 2 0 ]
+"26 /home/evaota/MPLABXProjects/PowerCTRL_MutingRelayUnit.X/DetectSwitch.c
+[v _Switch_GetTime Switch_GetTime `(ui  1 e 2 0 ]
 {
-"80
-[v Switch_ReadTime@store_time store_time `ui  1 a 2 6 ]
-"85
+"28
+[v Switch_GetTime@time_temp time_temp `ui  1 a 2 6 ]
+"33
 } 0
-"40
+"56 /home/evaota/MPLABXProjects/PowerCTRL_MutingRelayUnit.X/main.c
 [v _Basic_Init Basic_Init `(v  1 e 1 0 ]
 {
-"49
+"65
 } 0
-"51
+"67
 [v _Handler Handler `II(v  1 e 1 0 ]
 {
-"61
+"77
 } 0
-"63
-[v _Swich_CountHIGH Swich_CountHIGH `(v  1 e 1 0 ]
+"11 /home/evaota/MPLABXProjects/PowerCTRL_MutingRelayUnit.X/DetectSwitch.c
+[v _Switch_CountHIGH Switch_CountHIGH `(v  1 e 1 0 ]
 {
-"65
-[v Swich_CountHIGH@count count `ui  1 s 2 count ]
-"76
+"13
+[v Switch_CountHIGH@count_ms count_ms `ui  1 s 2 count_ms ]
+"24
 } 0

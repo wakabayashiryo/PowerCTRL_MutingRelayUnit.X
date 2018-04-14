@@ -7,13 +7,12 @@
 
 #include "main.h"
 
-uint16_t sw_time;
-
-void Swich_CountHIGH(void);
-uint16_t Switch_ReadTime(void);
+#define _DETECT_TIME 100
 
 void main(void)
 {
+    bool stat;
+    
     Basic_Init();
 
     T1CON = 0x00;
@@ -30,9 +29,26 @@ void main(void)
   
     while(1)
     {
-        if(Switch_ReadTime()>1000)
-        {           
-            GP4 = GP5 ^= 1; 
+        stat = (bool)(Switch_GetTime()>_DETECT_TIME);
+        
+        if(stat&&!SSR)
+        {   
+            SSR = 1;
+            LEDinSW = 1;
+            
+            __delay_ms(2000);
+            
+            RELAY1 = RELAY2 = 1;
+            
+        }
+        else if(stat&&SSR)
+        {
+            RELAY1 = RELAY2 = 0;
+            
+            __delay_ms(1000);
+            
+            SSR = 0;
+            LEDinSW = 0;
         }
     }
 }
@@ -49,37 +65,13 @@ void Basic_Init(void)
 }
 
 void interrupt Handler(void)
-{
+{    
     if(TMR1IF&&TMR1IE)
     {
         TMR1 = 0xFFFF-1000;
-        
-        Swich_CountHIGH();
+
+        Switch_CountHIGH();
         
         TMR1IF = 0;
     }
-}
-
-void Swich_CountHIGH(void)
-{
-    static uint16_t count = 0;
-    
-    if(!GP0)
-    {
-        count++;
-    }
-    else
-    {
-        sw_time = count;
-        count = 0;
-    }
-}
-
-uint16_t Switch_ReadTime(void)
-{
-    uint16_t store_time = sw_time;
-
-    sw_time = 0;
-    
-    return store_time;
 }

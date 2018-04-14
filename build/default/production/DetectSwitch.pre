@@ -1,5 +1,5 @@
 
-# 1 "main.c"
+# 1 "DetectSwitch.c"
 
 
 # 21 "main.h"
@@ -974,77 +974,36 @@ typedef uint16_t uintptr_t;
 # 12 "/opt/microchip/xc8/v1.43/include/stdbool.h"
 typedef unsigned char bool;
 
+# 39 "main.h"
+void Basic_Init(void);
+
 # 16 "DetectSwirch.h"
 void Switch_CountHIGH(void);
 uint16_t Switch_GetTime(void);
 
-# 39 "main.h"
-void Basic_Init(void);
+# 9 "DetectSwitch.c"
+static uint16_t time_save;
 
-# 12 "main.c"
-void main(void)
+void Switch_CountHIGH(void)
 {
-bool stat;
+static uint16_t count_ms = 0;
 
-Basic_Init();
-
-T1CON = 0x00;
-
-TMR1 = 0xFFFF-1000;
-
-TMR1ON = 1;
-
-TMR1IE = 1;
-TMR1IF = 0;
-
-PEIE = 1;
-GIE = 1;
-
-while(1)
+if(!GP0)
 {
-stat = (bool)(Switch_GetTime()>100);
-
-if(stat&&!GP2)
-{
-GP2 = 1;
-GP1 = 1;
-
-_delay((unsigned long)((2000)*(4000000/4000.0)));
-
-GP5 = GP4 = 1;
-
+count_ms++;
 }
-else if(stat&&GP2)
+else
 {
-GP5 = GP4 = 0;
-
-_delay((unsigned long)((1000)*(4000000/4000.0)));
-
-GP2 = 0;
-GP1 = 0;
-}
+time_save = count_ms;
+count_ms = 0;
 }
 }
 
-void Basic_Init(void)
+uint16_t Switch_GetTime(void)
 {
-TRISIO = 0x01;
-CMCON = 0x07;
-ANSEL = 0x00;
-WPU = 0x00;
-IOC = 0x00;
+uint16_t time_temp = time_save;
 
-GPIO = 0x00;
-}
+time_save = 0;
 
-void interrupt Handler(void)
-{
-if(TMR1IF&&TMR1IE)
-{
-TMR1 = 0xFFFF-1000;
-
-Switch_CountHIGH();
-
-TMR1IF = 0;
-}
+return time_temp;
 }

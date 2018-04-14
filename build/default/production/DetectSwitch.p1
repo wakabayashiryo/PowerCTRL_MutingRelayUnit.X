@@ -1,49 +1,6 @@
 Version 3.2 HI-TECH Software Intermediate Code
-[p mainexit ]
-"39 main.h
-[v _Basic_Init `(v ~T0 @X0 0 ef ]
-"497 /opt/microchip/xc8/v1.43/include/pic12f675.h
-[v _T1CON `Vuc ~T0 @X0 0 e@16 ]
-"450
-[v _TMR1 `Vus ~T0 @X0 0 e@14 ]
-"1653
-[v _TMR1ON `Vb ~T0 @X0 0 e@128 ]
-"1649
-[v _TMR1IE `Vb ~T0 @X0 0 e@1120 ]
-"1651
-[v _TMR1IF `Vb ~T0 @X0 0 e@96 ]
-"1607
-[v _PEIE `Vb ~T0 @X0 0 e@94 ]
-"1539
-[v _GIE `Vb ~T0 @X0 0 e@95 ]
-"17 DetectSwirch.h
-[v _Switch_GetTime `(ui ~T0 @X0 0 ef ]
-"1551 /opt/microchip/xc8/v1.43/include/pic12f675.h
-[v _GP2 `Vb ~T0 @X0 0 e@42 ]
-"1549
-[v _GP1 `Vb ~T0 @X0 0 e@41 ]
-[v F664 `(v ~T0 @X0 1 tf1`ul ]
-"152 /opt/microchip/xc8/v1.43/include/pic.h
-[v __delay `JF664 ~T0 @X0 0 e ]
-[p i __delay ]
-"1557 /opt/microchip/xc8/v1.43/include/pic12f675.h
-[v _GP5 `Vb ~T0 @X0 0 e@45 ]
-"1555
-[v _GP4 `Vb ~T0 @X0 0 e@44 ]
-"795
-[v _TRISIO `Vuc ~T0 @X0 0 e@133 ]
-"562
-[v _CMCON `Vuc ~T0 @X0 0 e@25 ]
-"1402
-[v _ANSEL `Vuc ~T0 @X0 0 e@159 ]
-"987
-[v _WPU `Vuc ~T0 @X0 0 e@149 ]
-"1032
-[v _IOC `Vuc ~T0 @X0 0 e@150 ]
-"216
-[v _GPIO `Vuc ~T0 @X0 0 e@5 ]
-"16 DetectSwirch.h
-[v _Switch_CountHIGH `(v ~T0 @X0 0 ef ]
+"1547 /opt/microchip/xc8/v1.43/include/pic12f675.h
+[v _GP0 `Vb ~T0 @X0 0 e@40 ]
 "21 main.h
 [p x FOSC=INTRCIO ]
 "22
@@ -715,171 +672,79 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdint.h: 210: typedef int16_t intptr_t;
 [; ;stdint.h: 215: typedef uint16_t uintptr_t;
 [; ;stdbool.h: 12: typedef unsigned char bool;
+[; ;main.h: 39: void Basic_Init(void);
 [; ;DetectSwirch.h: 16: void Switch_CountHIGH(void);
 [; ;DetectSwirch.h: 17: uint16_t Switch_GetTime(void);
-[; ;main.h: 39: void Basic_Init(void);
-[v $root$_main `(v ~T0 @X0 0 e ]
-"12 main.c
-[v _main `(v ~T0 @X0 1 ef ]
-"13
+"9 DetectSwitch.c
+[v _time_save `ui ~T0 @X0 1 s ]
+[; ;DetectSwitch.c: 9: static uint16_t time_save;
+"11
+[v _Switch_CountHIGH `(v ~T0 @X0 1 ef ]
+"12
 {
-[; ;main.c: 12: void main(void)
-[; ;main.c: 13: {
-[e :U _main ]
+[; ;DetectSwitch.c: 11: void Switch_CountHIGH(void)
+[; ;DetectSwitch.c: 12: {
+[e :U _Switch_CountHIGH ]
 [f ]
-"14
-[v _stat `uc ~T0 @X0 1 a ]
-[; ;main.c: 14: bool stat;
-[; ;main.c: 16: Basic_Init();
+"13
+[v F708 `ui ~T0 @X0 1 s count_ms ]
+[i F708
+-> -> 0 `i `ui
+]
+[; ;DetectSwitch.c: 13: static uint16_t count_ms = 0;
+[; ;DetectSwitch.c: 15: if(!GP0)
+"15
+[e $ ! ! _GP0 82  ]
+[; ;DetectSwitch.c: 16: {
 "16
-[e ( _Basic_Init ..  ]
-[; ;main.c: 18: T1CON = 0x00;
+{
+[; ;DetectSwitch.c: 17: count_ms++;
+"17
+[e ++ F708 -> -> 1 `i `ui ]
 "18
-[e = _T1CON -> -> 0 `i `uc ]
-[; ;main.c: 20: TMR1 = 0xFFFF-1000;
-"20
-[e = _TMR1 -> - -> 65535 `ui -> -> 1000 `i `ui `us ]
-[; ;main.c: 22: TMR1ON = 1;
-"22
-[e = _TMR1ON -> -> 1 `i `b ]
-[; ;main.c: 24: TMR1IE = 1;
-"24
-[e = _TMR1IE -> -> 1 `i `b ]
-[; ;main.c: 25: TMR1IF = 0;
-"25
-[e = _TMR1IF -> -> 0 `i `b ]
-[; ;main.c: 27: PEIE = 1;
-"27
-[e = _PEIE -> -> 1 `i `b ]
-[; ;main.c: 28: GIE = 1;
-"28
-[e = _GIE -> -> 1 `i `b ]
-[; ;main.c: 30: while(1)
-"30
-[e :U 83 ]
-[; ;main.c: 31: {
-"31
-{
-[; ;main.c: 32: stat = (bool)(Switch_GetTime()>100);
-"32
-[e = _stat -> -> > ( _Switch_GetTime ..  -> -> 100 `i `ui `i `uc ]
-[; ;main.c: 34: if(stat&&!GP2)
-"34
-[e $ ! && != -> _stat `i -> -> -> 0 `i `uc `i ! _GP2 85  ]
-[; ;main.c: 35: {
-"35
-{
-[; ;main.c: 36: GP2 = 1;
-"36
-[e = _GP2 -> -> 1 `i `b ]
-[; ;main.c: 37: GP1 = 1;
-"37
-[e = _GP1 -> -> 1 `i `b ]
-[; ;main.c: 39: _delay((unsigned long)((2000)*(4000000/4000.0)));
-"39
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-[; ;main.c: 41: GP5 = GP4 = 1;
-"41
-[e = _GP5 = _GP4 -> -> 1 `i `b ]
-"43
 }
-[; ;main.c: 43: }
-[e $U 86  ]
-"44
-[e :U 85 ]
-[; ;main.c: 44: else if(stat&&GP2)
-[e $ ! && != -> _stat `i -> -> -> 0 `i `uc `i _GP2 87  ]
-[; ;main.c: 45: {
-"45
-{
-[; ;main.c: 46: GP5 = GP4 = 0;
-"46
-[e = _GP5 = _GP4 -> -> 0 `i `b ]
-[; ;main.c: 48: _delay((unsigned long)((1000)*(4000000/4000.0)));
-"48
-[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-[; ;main.c: 50: GP2 = 0;
-"50
-[e = _GP2 -> -> 0 `i `b ]
-[; ;main.c: 51: GP1 = 0;
-"51
-[e = _GP1 -> -> 0 `i `b ]
-"52
-}
-[e :U 87 ]
-"53
-[e :U 86 ]
-}
-[e :U 82 ]
-"30
+[; ;DetectSwitch.c: 18: }
 [e $U 83  ]
-[e :U 84 ]
-[; ;main.c: 52: }
-[; ;main.c: 53: }
-[; ;main.c: 54: }
-"54
+"19
+[e :U 82 ]
+[; ;DetectSwitch.c: 19: else
+[; ;DetectSwitch.c: 20: {
+"20
+{
+[; ;DetectSwitch.c: 21: time_save = count_ms;
+"21
+[e = _time_save F708 ]
+[; ;DetectSwitch.c: 22: count_ms = 0;
+"22
+[e = F708 -> -> 0 `i `ui ]
+"23
+}
+[e :U 83 ]
+[; ;DetectSwitch.c: 23: }
+[; ;DetectSwitch.c: 24: }
+"24
 [e :UE 81 ]
 }
-"56
-[v _Basic_Init `(v ~T0 @X0 1 ef ]
-"57
+"26
+[v _Switch_GetTime `(ui ~T0 @X0 1 ef ]
+"27
 {
-[; ;main.c: 56: void Basic_Init(void)
-[; ;main.c: 57: {
-[e :U _Basic_Init ]
+[; ;DetectSwitch.c: 26: uint16_t Switch_GetTime(void)
+[; ;DetectSwitch.c: 27: {
+[e :U _Switch_GetTime ]
 [f ]
-[; ;main.c: 58: TRISIO = 0x01;
-"58
-[e = _TRISIO -> -> 1 `i `uc ]
-[; ;main.c: 59: CMCON = 0x07;
-"59
-[e = _CMCON -> -> 7 `i `uc ]
-[; ;main.c: 60: ANSEL = 0x00;
-"60
-[e = _ANSEL -> -> 0 `i `uc ]
-[; ;main.c: 61: WPU = 0x00;
-"61
-[e = _WPU -> -> 0 `i `uc ]
-[; ;main.c: 62: IOC = 0x00;
-"62
-[e = _IOC -> -> 0 `i `uc ]
-[; ;main.c: 64: GPIO = 0x00;
-"64
-[e = _GPIO -> -> 0 `i `uc ]
-[; ;main.c: 65: }
-"65
-[e :UE 88 ]
-}
-[v $root$_Handler `(v ~T0 @X0 0 e ]
-[v F715 `(v ~T0 @X0 1 tf ]
-"67
-[v _Handler `IF715 ~T0 @X0 1 e ]
-"68
-{
-[; ;main.c: 67: void interrupt Handler(void)
-[; ;main.c: 68: {
-[e :U _Handler ]
-[f ]
-[; ;main.c: 69: if(TMR1IF&&TMR1IE)
-"69
-[e $ ! && _TMR1IF _TMR1IE 90  ]
-[; ;main.c: 70: {
-"70
-{
-[; ;main.c: 71: TMR1 = 0xFFFF-1000;
-"71
-[e = _TMR1 -> - -> 65535 `ui -> -> 1000 `i `ui `us ]
-[; ;main.c: 73: Switch_CountHIGH();
-"73
-[e ( _Switch_CountHIGH ..  ]
-[; ;main.c: 75: TMR1IF = 0;
-"75
-[e = _TMR1IF -> -> 0 `i `b ]
-"76
-}
-[e :U 90 ]
-[; ;main.c: 76: }
-[; ;main.c: 77: }
-"77
-[e :UE 89 ]
+"28
+[v _time_temp `ui ~T0 @X0 1 a ]
+[; ;DetectSwitch.c: 28: uint16_t time_temp = time_save;
+[e = _time_temp _time_save ]
+[; ;DetectSwitch.c: 30: time_save = 0;
+"30
+[e = _time_save -> -> 0 `i `ui ]
+[; ;DetectSwitch.c: 32: return time_temp;
+"32
+[e ) _time_temp ]
+[e $UE 84  ]
+[; ;DetectSwitch.c: 33: }
+"33
+[e :UE 84 ]
 }
