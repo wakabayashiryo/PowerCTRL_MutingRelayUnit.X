@@ -13,7 +13,9 @@
     |7  |GP0 |alternate switch which was pull ups|
     |8  |Vss |Connet to GND|
     
-- # Circuit
+- # Circuit   
+    ![rtrtr](circuit-main.jpg "main")
+    ![rtrtr](circuit-power.jpg "power")
 
 - # Configuration of 12F675   
     
