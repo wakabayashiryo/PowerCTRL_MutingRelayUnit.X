@@ -982,6 +982,8 @@ uint16_t Switch_GetTime(void);
 void Basic_Init(void);
 
 # 12 "main.c"
+uint8_t standby = 1;
+
 void main(void)
 {
 bool stat;
@@ -1007,7 +1009,7 @@ stat = (bool)(Switch_GetTime()>100);
 if(stat&&!GP2)
 {
 GP2 = 1;
-GP1 = 1;
+standby = 0;
 
 _delay((unsigned long)((2000)*(4000000/4000.0)));
 
@@ -1021,7 +1023,7 @@ GP5 = GP4 = 0;
 _delay((unsigned long)((1000)*(4000000/4000.0)));
 
 GP2 = 0;
-GP1 = 0;
+standby = 1;
 }
 }
 }
@@ -1039,6 +1041,17 @@ GPIO = 0x00;
 
 void interrupt Handler(void)
 {
+static uint16_t count = 0;
+
+if((++count>1000)&&standby)
+{
+count = 0;
+GP1 = !GP1;
+}
+else if(standby==0)
+{
+GP1 = 0;
+}
 if(TMR1IF&&TMR1IE)
 {
 TMR1 = 0xFFFF-1000;

@@ -15,11 +15,11 @@
 [v _Switch_CountHIGH Switch_CountHIGH `(v  1 e 1 0 ]
 "26
 [v _Switch_GetTime Switch_GetTime `(ui  1 e 2 0 ]
-"12 /home/evaota/MPLABXProjects/PowerCTRL_MutingRelayUnit.X/main.c
+"14 /home/evaota/MPLABXProjects/PowerCTRL_MutingRelayUnit.X/main.c
 [v _main main `(v  1 e 1 0 ]
-"56
+"58
 [v _Basic_Init Basic_Init `(v  1 e 1 0 ]
-"67
+"69
 [v _Handler Handler `II(v  1 e 1 0 ]
 "216 /opt/microchip/xc8/v1.43/include/pic12f675.h
 [v _GPIO GPIO `VEuc  1 e 1 @5 ]
@@ -60,11 +60,13 @@
 "9 /home/evaota/MPLABXProjects/PowerCTRL_MutingRelayUnit.X/DetectSwitch.c
 [v _time_save time_save `ui  1 s 2 time_save ]
 "12 /home/evaota/MPLABXProjects/PowerCTRL_MutingRelayUnit.X/main.c
+[v _standby standby `uc  1 e 1 0 ]
+"14
 [v _main main `(v  1 e 1 0 ]
 {
-"14
+"16
 [v main@stat stat `uc  1 a 1 11 ]
-"54
+"56
 } 0
 "26 /home/evaota/MPLABXProjects/PowerCTRL_MutingRelayUnit.X/DetectSwitch.c
 [v _Switch_GetTime Switch_GetTime `(ui  1 e 2 0 ]
@@ -73,15 +75,17 @@
 [v Switch_GetTime@time_temp time_temp `ui  1 a 2 6 ]
 "33
 } 0
-"56 /home/evaota/MPLABXProjects/PowerCTRL_MutingRelayUnit.X/main.c
+"58 /home/evaota/MPLABXProjects/PowerCTRL_MutingRelayUnit.X/main.c
 [v _Basic_Init Basic_Init `(v  1 e 1 0 ]
 {
-"65
-} 0
 "67
+} 0
+"69
 [v _Handler Handler `II(v  1 e 1 0 ]
 {
-"77
+"71
+[v Handler@count count `ui  1 s 2 count ]
+"90
 } 0
 "11 /home/evaota/MPLABXProjects/PowerCTRL_MutingRelayUnit.X/DetectSwitch.c
 [v _Switch_CountHIGH Switch_CountHIGH `(v  1 e 1 0 ]

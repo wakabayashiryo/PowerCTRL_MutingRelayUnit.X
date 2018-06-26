@@ -9,6 +9,8 @@
 
 #define _DETECT_TIME 100
 
+uint8_t standby = 1;
+
 void main(void)
 {
     bool stat;
@@ -34,7 +36,7 @@ void main(void)
         if(stat&&!SSR)
         {   
             SSR = 1;
-            LEDinSW = 1;
+            standby = 0;
             
             __delay_ms(2000);
             
@@ -48,7 +50,7 @@ void main(void)
             __delay_ms(1000);
             
             SSR = 0;
-            LEDinSW = 0;
+            standby = 1;
         }
     }
 }
@@ -66,6 +68,17 @@ void Basic_Init(void)
 
 void interrupt Handler(void)
 {    
+    static uint16_t count = 0;
+    
+    if((++count>1000)&&standby)
+    {
+        count = 0;
+        LEDinSW = !LEDinSW;
+    }
+    else if(standby==0)
+    {
+        LEDinSW = 0;
+    }
     if(TMR1IF&&TMR1IE)
     {
         TMR1 = 0xFFFF-1000;

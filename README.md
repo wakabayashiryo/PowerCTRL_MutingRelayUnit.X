@@ -14,13 +14,13 @@
     |8  |Vss |Connet to GND|
     
 - # Circuit   
-    ![rtrtr](circuit-main.jpg "main")
-    ![rtrtr](circuit-power.jpg "power")
+    ![rtrtr](PowerCTRL_MutingRelayUint.jpg "main")
 
 - # Configuration of 12F675   
     
     - Clock:Internal RC clock (4Mhz)   
     - GP0 is input mode 
     - interrupt timing ever 1ms=1kHz
+    - when standby mode,LED with Switch is blinked
 
 
